@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..." 
                 sh 'chmod +x demo2/build.sh'
-                withCredentials([string(credentialsId: 'jenkins-webhook-id', variable: 'API_KEY')]) {
+                withCredentials([string(credentialsId: 'vickysunil', variable: 'API_KEY')]) {
                     sh '''
                         /demo2/build.sh
                     '''
