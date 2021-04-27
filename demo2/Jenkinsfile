@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE = '20.04'
+    }
+    stages {
+        stage('Build') {
+            agent any
+            environment {
+                LOG_LEVEL='INFO'
+            }
+            steps {
+                echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..." 
+                sh 'chmod +x build.sh'
+                withCredentials([string(credentialsId: 'an-api-key', variable: 'API_KEY')]) {
+                    sh '''
+                        ./build.sh
+                    '''
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing release ${RELEASE}..."
+            }
+        }
+        stage('Deploy') {
+            input {
+                message 'Deploy?'
+                ok 'Proceed'
+                parameters {
+                    string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+                }
+            }
+            steps {
+                echo "Deploying release ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
+            }
+        }
+    }
+    post{
+        success {
+            emailext body: 'A text mail', subject: 'test mail', to: 'sk6434812@gmail.com' 
+        }
+    }    
+}
