@@ -39,10 +39,10 @@ pipeline {
     }
     post{
         success {
-            emailext body: 'A successfull mail', subject: 'passed build', to: 'sk6434812@gmail.com' 
+            emailext body: 'A successfull mail', subject: 'passed build', to: 'vicky091sunil@gmail.com' 
         }
         failure {
-            emailext body: 'A failed build', subject: 'failure mail', to: 'sk6434812@gmail.com'
+            emailext body: 'A failed build', subject: 'failure mail', to: 'vicky091sunil@gmail.com'
         }
     }    
 }
