@@ -14,7 +14,7 @@ pipeline {
                 sh 'chmod +x build.sh'
                 withCredentials([string(credentialsId: 'an-api-key', variable: 'API_KEY')]) {
                     sh '''
-                        ./build.sh
+                        ./demo2/build.sh
                     '''
                 }
             }
@@ -39,7 +39,10 @@ pipeline {
     }
     post{
         success {
-            emailext body: 'A text mail', subject: 'test mail', to: 'sk6434812@gmail.com' 
+            emailext body: 'A successfull mail', subject: 'passed build', to: 'sk6434812@gmail.com' 
+        }
+        failure {
+            emailext body: 'A failed build', subject: 'failure mail', to: 'sk6434812@gmail.com'
         }
     }    
 }
