@@ -14,7 +14,7 @@ pipeline {
                 sh 'chmod +x build.sh'
                 withCredentials([string(credentialsId: 'an-api-key', variable: 'API_KEY')]) {
                     sh '''
-                        ./demo2/build.sh
+                        /demo2/build.sh
                     '''
                 }
             }
