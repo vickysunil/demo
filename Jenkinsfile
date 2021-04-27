@@ -26,6 +26,14 @@ pipeline {
                     string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
                 }
             }
+            steps {
+                echo "Deploying release ${RELEASE} to environment ${TARGET ENVIRONMENT}"
+            }
+        }
+    }
+    post{
+        always {
+            echo 'Prints whether deploy happened or not, success or failure'
         }
     }    
 }
