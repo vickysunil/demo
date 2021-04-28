@@ -1,0 +1,13 @@
+library identifier: 'demo@master',
+        retriever: modernSCM([$class: 'GitSCMSource', remote: 'https://github.com/vickysunil/demo.git'])
+
+pipeline {
+    agent any
+    stages {
+        stage('audit tools') {
+            steps {
+                auditTools()
+            }
+        }
+    }
+}
